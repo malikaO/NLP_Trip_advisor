@@ -1,0 +1,129 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Trip Advisor</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <title>
+    Comments Analyser
+  </title>
+  
+</head>
+
+{% block head %}
+
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <div class="wrapper">
+        <div class="inner">
+            <form id="input-form" class="input-form" action="{{ url_for('predict')}}" method="post">
+                <h3>Comments Analyser</h3>
+                <div class="form-wrapper">
+                    <p>Comment Reviewal </p>
+                </div>
+                <div class="form-wrapper">
+                    <textarea id="input_text" name="input_text" placeholder="Type something!"></textarea>
+                </div>
+                <button type="submit" class="pred-btn">Predict</button>
+
+                <br/>
+
+                <div class="form-wrapper">
+                    <p id="pred_text"></p>
+                    
+                </div>
+                <div class="form-wrapper">
+                <p>
+                    <input type="radio" name="options" id="option1" value="rc"> Random Classifier <br>
+                    <input type="radio" name="options" id="option2" value="svm" checked> SVM Classifier<br>
+                    <input type="radio" name="options" id="option"" value="sc"> Stacking Classifier <br>
+                </p>
+                </div>
+                <a href="dashboard" class="form-wrapper">View Stats</a>
+
+                
+            </form>
+            
+            
+
+            <div class="image-holder">
+                <div id="slide-div" class="bottom-buttons" style="display:none">
+                    <div class="output-div" id="pred_div">
+                        <img id="pred_image">
+                    </div>
+                </div>
+                <!-- <img src="{{ url_for('static', filename='img/image.jpg') }}" alt=""> -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="{{ url_for('static',filename='js/script.js') }}"></script>
+
+{% endblock %}
